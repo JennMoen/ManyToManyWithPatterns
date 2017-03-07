@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using ManyToMany.Data;
 using ManyToMany.Models;
 using ManyToMany.Services;
+using ManyToMany.Infrastructure;
 
 namespace ManyToMany
 {
@@ -52,8 +53,11 @@ namespace ManyToMany
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            
 
+            services.AddScoped<MovieRepository>();
+            services.AddScoped<MovieService>();
+            services.AddScoped<ActorService>();
+            services.AddScoped<ActorRepository>();
             
                         // add security policies
                         services.AddAuthorization(options =>

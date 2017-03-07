@@ -2,3 +2,10 @@
 <p>
     {{controller.message}}
 </p>
+
+<div ng-repeat="a in controller.actors">
+    {{a.id}}.{{a.firstName}}{{a.lastName}}
+    <div ng-repeat="m in a.associatedMovies">
+        {{m.movieName}}
+    </div>
+</div>

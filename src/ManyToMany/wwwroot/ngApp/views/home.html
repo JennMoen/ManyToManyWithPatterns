@@ -2,3 +2,14 @@
 <p>
     {{controller.message}}
 </p>
+
+<div ng-repeat="m in controller.movies">
+    {{m.id}}.{{m.title}}
+   
+    <div ng-repeat="a in m.associatedActors">
+        {{a.actorFirstName}} {{a.actorLastName}}
+    </div>
+</div>
+
+
+

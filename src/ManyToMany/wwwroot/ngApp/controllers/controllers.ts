@@ -1,7 +1,19 @@
 namespace ManyToMany.Controllers {
 
+   
+
     export class HomeController {
-        public message = 'Hello from the home page!';
+        public movies; 
+        public actors;
+        public message = 'Here are some movies and the actors that played in them';
+
+        constructor(private $http: ng.IHttpService) {
+            $http.get('/api/movies').then((results) => {
+                this.movies = results.data;
+            });
+        }
+
+        
     }
 
 
@@ -17,7 +29,14 @@ namespace ManyToMany.Controllers {
 
 
     export class AboutController {
-        public message = 'Hello from the about page!';
+        public message = 'And here is the same data listed by actors';
+        public actors;
+
+        constructor( private $http: ng.IHttpService)  {
+            $http.get('/api/actors').then((results) => {
+                this.actors = results.data;
+            });
+        }
     }
 
 }
