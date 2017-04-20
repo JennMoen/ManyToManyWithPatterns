@@ -58,6 +58,8 @@ namespace ManyToMany
             services.AddScoped<MovieService>();
             services.AddScoped<ActorService>();
             services.AddScoped<ActorRepository>();
+            services.AddScoped<MovieActorRepository>();
+            services.AddScoped<MovieActorService>();
             
                         // add security policies
                         services.AddAuthorization(options =>

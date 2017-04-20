@@ -20,14 +20,18 @@ namespace ManyToMany.Services
         {
             return (from m in _mRepo.GetMovieById(movieId)
                     select new MovieDTO()
-                    {   Id = m.Id,
+                    {
+                        Id = m.Id,
                         Title = m.Title,
                         Director = m.Director,
                         AssociatedActors = (from a in m.MovieActors
                                             select new MovieActorDTO()
                                             {
                                                 ActorFirstName = a.Actor.FirstName,
-                                                ActorLastName = a.Actor.LastName
+                                                ActorLastName = a.Actor.LastName,
+                                                ActorId = a.Actor.Id,
+                                                MovieId = a.Movie.Id,
+                                                MovieName = a.Movie.Title
                                             }).ToList()
 
                     }).FirstOrDefault();
@@ -48,7 +52,9 @@ namespace ManyToMany.Services
                                             {
                                                 ActorFirstName = a.Actor.FirstName,
                                                 ActorLastName = a.Actor.LastName,
-                                                ActorId = a.Actor.Id
+                                                ActorId = a.Actor.Id,
+                                                MovieId = a.Movie.Id,
+                                                MovieName = a.Movie.Title
                                             }).ToList()
 
                     }).ToList();

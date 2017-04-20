@@ -13,6 +13,12 @@ namespace ManyToMany {
                 controller: ManyToMany.Controllers.HomeController,
                 controllerAs: 'controller'
             })
+            .state('details', {
+                url: '/details/:id',
+                templateUrl: '/ngApp/views/details.html',
+                controller: ManyToMany.Controllers.DetailsController,
+                controllerAs: 'controller'
+            })
             .state('secret', {
                 url: '/secret',
                 templateUrl: '/ngApp/views/secret.html',

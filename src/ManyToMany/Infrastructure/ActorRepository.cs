@@ -30,5 +30,11 @@ namespace ManyToMany.Infrastructure
                    where a.Id == id
                    select a;
         }
+
+        public void AddActor(Actor actor) 
+        {
+            _db.Actors.Add(actor);
+            _db.SaveChanges();
+        }
     }
 }

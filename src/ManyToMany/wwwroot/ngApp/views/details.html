@@ -1,0 +1,16 @@
+﻿<h1>Movie Details</h1>
+
+
+{{controller.movie.title}}
+<div>Actors in this film are:</div>
+<div ng-repeat="a in controller.movie.associatedActors">
+    {{a.actorFirstName}}
+    {{a.actorLastName}}
+</div>
+
+<h2>Add an actor to this movie list</h2>
+<form ng-submit="controller.save(actor)">
+    <input type="text" ng-model="actor.firstName" placeholder="Actor First Name"/>
+    <input type="text" ng-model="actor.lastName" placeholder="Actor Last Name"/>
+    <input type="submit" value="save actor" />
+</form>

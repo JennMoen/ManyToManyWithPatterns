@@ -16,36 +16,13 @@ namespace ManyToMany.Controllers
     {
         private ApplicationDbContext _db;
         private MovieService _mService;
+        private MovieActorService _maService;
 
-        public MoviesController(ApplicationDbContext db, MovieService ms)
+        public MoviesController(ApplicationDbContext db, MovieService ms, MovieActorService ma)
         {
             this._db = db;
             this._mService = ms;
-        }
-
-
-        [HttpPost("{id}")]
-        public IActionResult Post(int id, [FromBody]Actor actor)
-        {
-            // create actor
-            _db.Actors.Add(actor);
-            _db.SaveChanges();
-
-            // add actor to existing movie
-            _db.MovieActors.Add(new MovieActor
-            {
-                MovieId = id,
-                ActorId = actor.Id
-            });
-            _db.SaveChanges();
-
-            // success
-            return Ok();
-        }
-        [HttpGet("{movieId}")]
-        public MovieDTO GetActorsForMovie(int movieId)
-        {
-            return _mService.GetActorsPerMovie(movieId);
+            this._maService = ma;
         }
 
         [HttpGet]
@@ -53,6 +30,27 @@ namespace ManyToMany.Controllers
         {
             return _mService.GetAllMovies();
         }
+
+        [HttpGet("{movieId}")]
+        public MovieDTO GetActorsForMovie(int movieId)
+        {
+            return _mService.GetActorsPerMovie(movieId);
+        }
+
+        [HttpPost("{movieId}")]
+        public IActionResult SaveActorToMovie(int movieId, [FromBody]ActorDTO actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+           
+            _maService.AddActorToMovie(movieId, actor);
+
+            return Ok();
+        }
+
+        
 
        
     }
